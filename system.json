@@ -1,0 +1,31 @@
+{
+    "id": "atow",
+    "title": "BattleTech: A Time of War Unofficial",
+    "description": "Unofficial FVTT implementation of the BattleTech: A Time of War RPG.",
+    "version": "0.0.1",
+    "compatibility": {
+        "minimum": 11,
+        "verified": 11
+    },
+    "url": "https://github.com/NekohimeMusou/atow",
+    "authors": [
+        {
+            "name": "Nekohime Musou",
+            "url": "https://github.com/NekohimeMusou",
+            "discord": "nekohime.musou"
+        }
+    ],
+    "esmodules": [
+        "module/atow.mjs"
+    ],
+    "styles": [
+        "styles/atow.css"
+    ],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json"
+        }
+    ]
+}
