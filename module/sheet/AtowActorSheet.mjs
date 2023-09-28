@@ -5,7 +5,7 @@ export default class AtowActorSheet extends ActorSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["atow", "sheet", "actor"],
-      template: "systems/atow/templates/actor/actor-sheet.html",
+      template: "systems/atow/templates/actor/actor-sheet.hbs",
       width: 800,
       height: 800,
       tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "main"}],

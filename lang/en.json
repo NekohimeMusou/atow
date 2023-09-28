@@ -1,1 +1,22 @@
-{}
+{
+    "ATOW": {
+        "tabs": {
+            "main": "Main",
+            "description": "Description"
+        },
+        "mechanic": {
+            "stdDamage": "Standard Damage",
+            "fatigueDamage": "Fatigue Damage",
+            "xpTotal": "XP Total"
+        },
+        "skillComplexity": {
+            "sb": "Simple Basic",
+            "sa": "Simple Advanced",
+            "cb": "Complex Basic",
+            "ca": "Complex Advanced"
+        },
+        "bio": {
+            "affiliation": "Affiliation"
+        }
+    }
+}

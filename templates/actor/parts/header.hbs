@@ -1,0 +1,44 @@
+<header class="sheet-header">
+  <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100" />
+  <div class="header-fields">
+    <h1 class="charname">
+        <input name="name" type="text" value="{{actor.name}}" placeholder="Name">
+    </h1>
+    <div class="resources grid grid-2col">
+      {{!-- Row 1 --}}
+      {{!-- Affiliation --}}
+      <div class="resource flex-group-center">
+        <label for="system.stdDamage.value" class="resource-label">{{localize "ATOW.mechanic.stdDamage"}}</label>
+        <div class="resource-content flexrow flex-center flex-between">
+          <input type="text" name="system.stdDamage.value" value="{{system.stdDamage.value}}" data-dtype="Number"/>
+          <span> / </span>
+          <input type="text" name="system.stdDamage.max" value="{{system.stdDamage.max}}" data-dtype="Number"/>
+        </div>
+      </div>
+
+      <div class="resource flex-group-center">
+        <label for="system.fatigueDamage.value" class="resource-label">{{localize "ATOW.mechanic.fatigueDamage"}}</label>
+        <div class="resource-content flexrow flex-center flex-between">
+          <input type="text" name="system.fatigueDamage.value" value="{{system.fatigueDamage.value}}" data-dtype="Number"/>
+          <span> / </span>
+          <input type="text" name="system.fatigueDamage.max" value="{{system.fatigueDamage.max}}" data-dtype="Number"/>
+        </div>
+      </div>
+
+      {{!-- Row 2 --}}
+      <div class="resource flex-group-center">
+        <label for="system.xpTotal" class="resource-label">{{localize "ATOW.mechanic.xpTotal"}}</label>
+        <div class="resource-content flexrow flex-center flex-between">
+          <input type="text" name="system.xpTotal" value="{{system.xpTotal}}" data-dtype="Number"/>
+        </div>
+      </div>
+
+      <div class="resource flex-group-center">
+        <label for="system.affiliation" class="resource-label">{{localize "ATOW.bio.affiliation"}}</label>
+        <div class="resource-content flexrow flex-center flex-between">
+          <input type="text" name="system.affiliation" value="{{system.affiliation}}" data-dtype="String" />
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
