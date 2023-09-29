@@ -4,6 +4,16 @@
             "main": "Main",
             "description": "Description"
         },
+        "attributes": {
+            "str": "Strength",
+            "bod": "Body",
+            "rfl": "Reflexes",
+            "dex": "Dexterity",
+            "int": "Intelligence",
+            "wil": "Willpower",
+            "cha": "Charisma",
+            "edg": "Edge"
+        },
         "mechanic": {
             "stdDamage": "Standard Damage",
             "fatigueDamage": "Fatigue Damage",
