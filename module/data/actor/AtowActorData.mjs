@@ -97,6 +97,10 @@ export default class AtowActorData extends foundry.abstract.DataModel {
           }),
         }),
       }),
+      sheetLocked: new fields.BooleanField({
+        required: true,
+        initial: false,
+      }),
     };
   }
 }

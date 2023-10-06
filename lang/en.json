@@ -4,6 +4,9 @@
             "main": "Main",
             "description": "Description"
         },
+        "sheet": {
+            "locked": "Locked"
+        },
         "attributes": {
             "str": "Strength",
             "bod": "Body",
@@ -17,7 +20,12 @@
         "mechanic": {
             "stdDamage": "Standard Damage",
             "fatigueDamage": "Fatigue Damage",
-            "xpTotal": "XP Total"
+            "xpTotal": "XP Total",
+            "attributes": "Attributes",
+            "attribute": "Attribute",
+            "attributeRoll": "Attribute Roll",
+            "xp": "XP",
+            "link": "Link"
         },
         "skillComplexity": {
             "sb": "Simple Basic",
