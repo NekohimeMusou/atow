@@ -4,7 +4,7 @@ export default class AtowActor extends Actor {
     super.prepareData();
   }
 
-  prepareDerivedData() {
+  prepareBaseData() {
     // const flags = this.flags.atow || {};
 
     this._prepareAttributes();
@@ -16,13 +16,13 @@ export default class AtowActor extends Actor {
     const attributes = this.system.attributes;
 
     // Calculate attribute values from XP
-    Object.values(attributes).foreach(
+    Object.values(attributes).forEach(
         (a) => a.value = Math.max(Math.trunc(a.xp / 100), 0),
     );
 
     // Calculate link modifiers
-    Object.values(attributes).foreach(
-        (a) => a.linkMod = AtowActor.calcLinkMod(a),
+    Object.values(attributes).forEach(
+        (a) => a.linkMod = AtowActor.calcLinkMod(a.value),
     );
   }
 

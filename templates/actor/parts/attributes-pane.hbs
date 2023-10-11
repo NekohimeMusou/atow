@@ -1,32 +1,21 @@
 <div class="stats flexcol">
   <div class="resource-label flex-group-center flex0">{{localize "ATOW.mechanic.attributes"}}</div>
 
-  <div class="flexrow">
-    <label for="system.sheetLocked" class="resource-label">{{localize "ATOW.sheet.locked"}}</div>
-    <input type="checkbox" name="system.sheetLocked" {{checked system.sheetLocked}}/>
-  </div>
-
-  {{!-- XP | Checkbox | Score | Mod --}}
-  <div class="stat flexrow items-header">
-    {{#unless system.sheetLocked}}<div>{{localize "ATOW.mechanic.xp"}}</div>{{/unless}}
-    <div class="flex1"></div>
-    <div>{{localize "ATOW.mechanic.attribute"}}</div>
+  <div class="stat grid grid-5col">
+    {{!-- Header row --}}
+    <div>Roll</div>
+    <div class="grid-span-2">{{localize "ATOW.mechanic.attribute"}}</div>
     <div>{{localize "ATOW.mechanic.link"}}</div>
+    <div>{{localize "ATOW.mechanic.xp"}}</div>
+    {{!-- Attribute rows --}}
+    {{#each system.attributes as |attr key|}}
+    <input type="checkbox" name="system.attributes.{{key}}.selected" {{checked attr.selected}}/>
+    <div class="resource-label align-center">{{localize (concat "ATOW.attributes." key)}}</div>
+    <input type="number" value="{{attr.value}}" readonly/>
+    <input type="number" value="{{attr.linkMod}}" readonly/>
+    <input type="number" name="system.attributes.{{key}}.xp" value="{{attr.xp}}"/>
+    {{/each}}
   </div>
-
-  {{#each system.attributes as |attr key|}}
-  {{#unless system.sheetLocked}}<input type="number" name="system.attributes.{{key}}.xp" value="{{attr.xp}}"/>{{/unless}}
-  {{!-- TODO: Figure out how to do this checkbox --}}
-  {{/each}}
-
-  {{!-- FIXTHIS: Update to match template (only for reference) --}}
-  {{#each system.attributes as |attribute key|}}
-  <div class="stat flexrow flex-group-center">
-    <a class="resource-label align-center roll-attribute" data-label="{{attribute.label}}" data-roll="2d6+@{{key}}Mod"><label for="system.stats.{{key}}.base">{{upperCase key}}</label></a>
-    <input type="text" name="system.stats.{{key}}.base" value="{{stat.base}}" data-dtype="Number" />
-    <a class="stat-mod roll-stat" data-label="{{stat.label}}" data-roll="2d6+@{{key}}Mod"><span>{{numberFormat stat.mod decimals=0 sign=true}}</span></a>
-  </div>
-  {{/each}}
 
   <button type="button" class="attribute-roll">{{localize "ATOW.mechanic.attributeRoll"}}</button>
 </div>
