@@ -3,6 +3,27 @@ export default class AtowActorData extends foundry.abstract.DataModel {
   static defineSchema() {
     const fields = foundry.data.fields;
 
+    const attributes = new fields.SchemaField(
+      Object.fromEntries(
+        ["str", "bod", "rfl", "dex", "int", "wil", "cha", "edg"].map(
+          (a) => [a, new fields.SchemaField({
+            xp: new fields.NumberField({
+              required: true,
+              initial: 0,
+              integer: true,
+            }),
+            linkMod: new fields.NumberField({
+              initial: 0,
+              integer: true,
+            }),
+            value: new fields.NumberField({
+              initial: 0,
+              integer: true,
+            }),
+          })]
+        )
+    ));
+
     return {
       description: new fields.HTMLField(),
       affiliation: new fields.StringField(),
@@ -39,104 +60,7 @@ export default class AtowActorData extends foundry.abstract.DataModel {
           integer: true,
         }),
       }),
-      attributes: new fields.SchemaField({
-        str: new fields.SchemaField({
-          xp: new fields.NumberField({
-            required: true,
-            initial: 0,
-            integer: true,
-          }),
-          selected: new fields.BooleanField({
-            required: true,
-            initial: false,
-          }),
-        }),
-        bod: new fields.SchemaField({
-          xp: new fields.NumberField({
-            required: true,
-            initial: 0,
-            integer: true,
-          }),
-          selected: new fields.BooleanField({
-            required: true,
-            initial: false,
-          }),
-        }),
-        rfl: new fields.SchemaField({
-          xp: new fields.NumberField({
-            required: true,
-            initial: 0,
-            integer: true,
-          }),
-          selected: new fields.BooleanField({
-            required: true,
-            initial: false,
-          }),
-        }),
-        dex: new fields.SchemaField({
-          xp: new fields.NumberField({
-            required: true,
-            initial: 0,
-            integer: true,
-          }),
-          selected: new fields.BooleanField({
-            required: true,
-            initial: false,
-          }),
-        }),
-        int: new fields.SchemaField({
-          xp: new fields.NumberField({
-            required: true,
-            initial: 0,
-            integer: true,
-          }),
-          selected: new fields.BooleanField({
-            required: true,
-            initial: false,
-          }),
-          linkMod: new fields.NumberField({
-            initial: 0,
-            integer: true,
-          }),
-          value: new fields.NumberField({
-            initial: 0,
-            integer: true,
-          }),
-        }),
-        wil: new fields.SchemaField({
-          xp: new fields.NumberField({
-            required: true,
-            initial: 0,
-            integer: true,
-          }),
-          selected: new fields.BooleanField({
-            required: true,
-            initial: false,
-          }),
-        }),
-        cha: new fields.SchemaField({
-          xp: new fields.NumberField({
-            required: true,
-            initial: 0,
-            integer: true,
-          }),
-          selected: new fields.BooleanField({
-            required: true,
-            initial: false,
-          }),
-        }),
-        edg: new fields.SchemaField({
-          xp: new fields.NumberField({
-            required: true,
-            initial: 0,
-            integer: true,
-          }),
-          selected: new fields.BooleanField({
-            required: true,
-            initial: false,
-          }),
-        }),
-      })
+      attributes,
     };
   }
 }

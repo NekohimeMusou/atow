@@ -1,21 +1,15 @@
 <div class="stats flexcol">
-  <div class="resource-label flex-group-center flex0">{{localize "ATOW.mechanic.attributes"}}</div>
-
   <div class="stat grid grid-5col">
     {{!-- Header row --}}
-    <div>Roll</div>
-    <div class="grid-span-2">{{localize "ATOW.mechanic.attribute"}}</div>
-    <div>{{localize "ATOW.mechanic.link"}}</div>
-    <div>{{localize "ATOW.mechanic.xp"}}</div>
+    <div class="grid-span-3"></div>
+    <div class="resource-label align-center">{{localize "ATOW.mechanic.link"}}</div>
+    <div class="resource-label align-center">{{localize "ATOW.mechanic.xp"}}</div>
     {{!-- Attribute rows --}}
     {{#each system.attributes as |attr key|}}
-    <input type="checkbox" name="system.attributes.{{key}}.selected" {{checked attr.selected}}/>
-    <div class="resource-label align-center">{{localize (concat "ATOW.attributes." key)}}</div>
+    <div class="grid-span-2"><a class="resource-label attribute-roll" data-attr="{{attr}}">{{localize (concat "ATOW.attributes." key)}}</a></div>
     <input type="number" value="{{attr.value}}" readonly/>
     <input type="number" value="{{attr.linkMod}}" readonly/>
-    <input type="number" name="system.attributes.{{key}}.xp" value="{{attr.xp}}"/>
+    <input type="number" name="system.attributes.{{key}}.xp" value="{{attr.xp}}" placeholder="0"/>
     {{/each}}
   </div>
-
-  <button type="button" class="attribute-roll">{{localize "ATOW.mechanic.attributeRoll"}}</button>
 </div>

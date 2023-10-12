@@ -75,6 +75,8 @@ export default class AtowActorSheet extends ActorSheet {
         li.addEventListener("dragstart", handler, false);
       });
     }
+
+    html.find(".attribute-roll").click((ev) => this.#onAttributeRoll(ev));
   }
 
   /**
@@ -102,5 +104,10 @@ export default class AtowActorSheet extends ActorSheet {
 
     // Finally, create the item!
     return await Item.create(itemData, {parent: this.actor});
+  }
+
+  async #onAttributeRoll(event) {
+    // Show dialog to enter mod + choose second attr (or don't if shift is held)
+    // 2d6+attr vs. TN 12, or 2d6+attr1+attr2 vs. TN 18
   }
 }
