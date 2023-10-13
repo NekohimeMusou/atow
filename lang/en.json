@@ -35,6 +35,9 @@
         },
         "bio": {
             "affiliation": "Affiliation"
+        },
+        "dialog": {
+            "rollModifier": "Roll Modifier"
         }
     }
 }

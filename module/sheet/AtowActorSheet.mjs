@@ -1,4 +1,5 @@
 import {onManageActiveEffect, prepareActiveEffectCategories} from "../config/active-effects.mjs";
+import {attributeRoll} from "../helpers/dice.mjs";
 
 export default class AtowActorSheet extends ActorSheet {
   /** @override */
@@ -109,5 +110,13 @@ export default class AtowActorSheet extends ActorSheet {
   async #onAttributeRoll(event) {
     // Show dialog to enter mod + choose second attr (or don't if shift is held)
     // 2d6+attr vs. TN 12, or 2d6+attr1+attr2 vs. TN 18
+    event.preventDefault();
+    const element = event.currentTarget;
+    const dataset = element.dataset;
+    const attr = dataset.attr;
+
+    if (!attr) return;
+
+    return await attributeRoll(this.actor.getRollData(), attr);
   }
 }

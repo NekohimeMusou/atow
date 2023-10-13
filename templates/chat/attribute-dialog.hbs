@@ -1,0 +1,15 @@
+<form>
+  {{!-- Modifier --}}
+  {{!-- Second attr drop-down --}}
+  <div class="resource-label">{{title}}</div>
+  <div>
+    <label>{{localize "ATOW.dialog.rollModifier"}}:</label>
+    <input type="number" placeholder="0" name="mod" data-dtype="Number"/>
+  </div>
+  <div>
+    <label>{{localize "ATOW.mechanic.attribute"}} 2:</label>
+    <select name="attr2">
+      {{selectOptions attrList nameAttr="key" labelAttr="label" blank="---" localize="true"}}
+    </select>
+  </div>
+</form>
