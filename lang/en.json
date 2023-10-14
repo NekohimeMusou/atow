@@ -17,6 +17,9 @@
             "cha": "Charisma",
             "edg": "Edge"
         },
+        "traits": {
+            "trait": "Trait"
+        },
         "mechanic": {
             "stdDamage": "Standard Damage",
             "fatigueDamage": "Fatigue Damage",
@@ -25,7 +28,8 @@
             "attribute": "Attribute",
             "attributeRoll": "Attribute Roll",
             "xp": "XP",
-            "link": "Link"
+            "link": "Link",
+            "rank": "Rank"
         },
         "skillComplexity": {
             "sb": "Simple Basic",

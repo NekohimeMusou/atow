@@ -15,7 +15,7 @@ export default class AtowItemSheet extends ItemSheet {
   get template() {
     const basePath = "systems/atow/templates/item";
 
-    return `${basePath}/item-${this.item.type}-sheet.html`;
+    return `${basePath}/item-${this.item.type}-sheet.hbs`;
   }
 
   /** @override */
@@ -26,13 +26,12 @@ export default class AtowItemSheet extends ItemSheet {
 
     const system = itemData.system;
     const flags = itemData.flags;
-    const rollData = this.object?.parent.getRollData?.() || {};
+    const rollData = this.item.getRollData() || {};
     const effects = prepareActiveEffectCategories(this.item.effects);
     const ATOW = CONFIG.ATOW;
 
-    Object.assign(context, {
-      system, flags, rollData, effects, ATOW,
-    });
+    Object.assign(context,
+        {system, flags, rollData, effects, ATOW});
 
     return context;
   }
@@ -45,6 +44,7 @@ export default class AtowItemSheet extends ItemSheet {
     if (!this.isEditable) return;
 
     // Roll handlers, click handlers, etc. would go here.
+    // ADD HANDLER FOR XP CHANGE
 
     // Active Effect management
     html.find(".effect-control").click((ev) => onManageActiveEffect(ev, this.item));
