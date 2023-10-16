@@ -13,7 +13,7 @@ export default class AtowItem extends Item {
   _prepareTraitData() {
     if (this.type !== "trait") return;
 
-    this.system.rank = Math.trunc(this.system.xp / 100);
+    this.system.rank = Math.trunc((this.system.xp || 0) / 100);
   }
 
   _prepareSkillData() {

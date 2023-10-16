@@ -80,6 +80,7 @@ export default class AtowActorSheet extends ActorSheet {
     }
 
     html.find(".attribute-roll").click((ev) => this.#onAttributeRoll(ev));
+    html.find(".item-xp-field").change((ev) => this.#onItemXpUpdate(ev));
   }
 
   /**
@@ -89,11 +90,11 @@ export default class AtowActorSheet extends ActorSheet {
      */
   async #onItemCreate(event) {
     event.preventDefault();
-    const header = event.currentTarget;
+    const element = event.currentTarget;
     // Get the type of item to create.
-    const type = header.dataset.type;
+    const type = element.dataset.type;
     // Grab any data associated with this control.
-    const system = duplicate(header.dataset);
+    const system = duplicate(element.dataset);
     // Initialize a default name.
     const itemName = `New ${type.capitalize()}`;
     // Prepare the item object.
@@ -120,5 +121,17 @@ export default class AtowActorSheet extends ActorSheet {
     if (!attr) return;
 
     return await attributeRoll(this.actor.getRollData(), attr);
+  }
+
+  async #onItemXpUpdate(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    const itemId = element.closest(".item").dataset.itemId;
+    const item = this.actor.items.get(itemId);
+
+    const xp = parseInt(element.value) || 0;
+
+    await item.update({"system.xp": xp});
+    await this.render(false);
   }
 }
