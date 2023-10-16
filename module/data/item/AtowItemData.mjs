@@ -22,6 +22,15 @@ export default class AtowItemData extends foundry.abstract.DataModel {
         initial: "sb",
       }),
       rank: new fields.NumberField({
+        required: true,
+        default: 0,
+        integer: true,
+      }),
+      tn: new fields.NumberField({
+        required: false,
+        integer: true,
+      }),
+      linkMod: new fields.NumberField({
         required: false,
         integer: true,
       }),

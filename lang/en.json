@@ -5,7 +5,9 @@
             "description": "Description"
         },
         "sheet": {
-            "locked": "Locked"
+            "locked": "Locked",
+            "createItem": "Create Item",
+            "addItem": "Add Item"
         },
         "attributes": {
             "str": "Strength",
@@ -29,13 +31,19 @@
             "attributeRoll": "Attribute Roll",
             "xp": "XP",
             "link": "Link",
-            "rank": "Rank"
+            "rank": "Rank",
+            "tn": "TN",
+            "mod": "Mod"
         },
-        "skillComplexity": {
-            "sb": "Simple Basic",
-            "sa": "Simple Advanced",
-            "cb": "Complex Basic",
-            "ca": "Complex Advanced"
+        "skills": {
+            "skill": "Skill",
+            "complexity": "Complexity",
+            "complexityRating": {
+                "sb": "Simple Basic",
+                "sa": "Simple Advanced",
+                "cb": "Complex Basic",
+                "ca": "Complex Advanced"
+            }
         },
         "bio": {
             "affiliation": "Affiliation"

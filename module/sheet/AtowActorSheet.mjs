@@ -33,9 +33,12 @@ export default class AtowActorSheet extends ActorSheet {
     const effects = prepareActiveEffectCategories(this.actor.effects);
 
     const traits = context.items.filter((i) => i.type === "trait");
+    const skills = context.items.filter((i) => i.type === "skill");
+
+    const complexityRatings = {sb: "SB", sa: "SA", cb: "CB", ca: "CA"};
 
     Object.assign(context, {
-      system, flags, rollData, effects, traits, ATOW,
+      system, flags, rollData, effects, traits, skills, ATOW, complexityRatings,
     });
 
     return context;

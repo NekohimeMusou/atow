@@ -26,6 +26,7 @@ Hooks.once("init", async function() {
   registerDataModels();
   registerDocumentClasses();
   registerSheetApplications();
+  registerHandlebarsHelpers();
   preloadHandlebarsTemplates();
 });
 
@@ -45,4 +46,8 @@ function registerSheetApplications() {
   Actors.registerSheet("atow", AtowActorSheet, {makeDefault: true});
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("atow", AtowItemSheet, {makeDefault: true});
+}
+
+function registerHandlebarsHelpers() {
+  Handlebars.registerHelper("caps", (str) => str.toUpperCase?.() || str);
 }
