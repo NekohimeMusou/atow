@@ -70,14 +70,14 @@ export default class AtowActorSheet extends ActorSheet {
     html.find(".effect-control").click((ev) => onManageActiveEffect(ev, this.actor));
 
     // Drag events for macros.
-    if (this.actor.isOwner) {
-      const handler = (ev) => this._onDragStart(ev);
-      html.find("li.item").each((_, li) => {
-        if (li.classList.contains("inventory-header")) return;
-        li.setAttribute("draggable", true);
-        li.addEventListener("dragstart", handler, false);
-      });
-    }
+    // if (this.actor.isOwner) {
+    //   const handler = (ev) => this._onDragStart(ev);
+    //   html.find("li.item").each((_, li) => {
+    //     if (li.classList.contains("inventory-header")) return;
+    //     li.setAttribute("draggable", true);
+    //     li.addEventListener("dragstart", handler, false);
+    //   });
+    // }
 
     html.find(".attribute-roll").click((ev) => this.#onAttributeRoll(ev));
     html.find(".item-xp-field").change((ev) => this.#onItemXpUpdate(ev));
