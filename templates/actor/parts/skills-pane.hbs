@@ -2,9 +2,11 @@
   <ol class="items-list">
     <li class="item flexrow items-header">
       <div class="item-name">{{localize "ATOW.skills.skill"}}</div>
+      <div class="item-total">{{localize "ATOW.skills.total"}}</div>
       <div class="item-tn">{{localize "ATOW.mechanic.tn"}}</div>
       <div class="item-complexity">{{localize "ATOW.skills.complexity"}}</div>
-      <div class="item-link grid-span-2">{{localize "ATOW.mechanic.link"}}</div>
+      <div class="item-link">{{localize "ATOW.mechanic.link"}} 1</div>
+      <div class="item-link">{{localize "ATOW.mechanic.link"}} 2</div>
       <div class="item-rank">{{localize "ATOW.mechanic.rank"}}</div>
       <div class="item-xp">{{localize "ATOW.mechanic.xp"}}</div>
       <div class="item-controls">
@@ -19,19 +21,26 @@
         </div>
         <h4>{{item.name}}</h4>
       </div>
+      <div class="item-total item-prop">
+        <input type="number" value="{{item.system.total}}" disabled/>
+      </div>
       <div class="item-tn item-prop">
         <input type="number" value="{{item.system.tn}}" disabled/>
       </div>
       <div class="item-complexity item-prop">
         <select class="item-complexity-select">
-            {{selectOptions complexityRatings selected=item.system.complexity}}
+            {{selectOptions ../ATOW.complexityRatings selected=item.system.complexity}}
         </select>
       </div>
-      <div class="item-link item-prop flexrow">
-        {{!-- TODO: Add dropdowns here --}}
+      <div class="item-link item-prop">
+        <select class="item-link-select" data-link-field="link1">
+          {{selectOptions ../ATOW.stats selected=item.system.link1}}
+        </select>
       </div>
-      <div class="item-link-mod item-prop">
-        <input type="number" value="{{item.system.linkMod}}" disabled/>
+      <div class="item-link item-prop">
+        <select class="item-link-select" data-link-field="link2">
+          {{selectOptions ../ATOW.stats selected=item.system.link2 blank="---"}}
+        </select>
       </div>
       <div class="item-rank item-prop">
         <input type="number" value="{{item.system.rank}}" disabled/>

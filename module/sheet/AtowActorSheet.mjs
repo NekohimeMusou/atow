@@ -7,7 +7,7 @@ export default class AtowActorSheet extends ActorSheet {
     return mergeObject(super.defaultOptions, {
       classes: ["atow", "sheet", "actor"],
       template: "systems/atow/templates/actor/actor-sheet.hbs",
-      width: 800,
+      width: 1000,
       height: 800,
       tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "main"}],
     });
@@ -35,10 +35,8 @@ export default class AtowActorSheet extends ActorSheet {
     const traits = context.items.filter((i) => i.type === "trait");
     const skills = context.items.filter((i) => i.type === "skill");
 
-    const complexityRatings = {sb: "SB", sa: "SA", cb: "CB", ca: "CA"};
-
     Object.assign(context, {
-      system, flags, rollData, effects, traits, skills, ATOW, complexityRatings,
+      system, flags, rollData, effects, traits, skills, ATOW,
     });
 
     return context;
@@ -72,18 +70,10 @@ export default class AtowActorSheet extends ActorSheet {
     // Active Effect management
     html.find(".effect-control").click((ev) => onManageActiveEffect(ev, this.actor));
 
-    // Drag events for macros.
-    // if (this.actor.isOwner) {
-    //   const handler = (ev) => this._onDragStart(ev);
-    //   html.find("li.item").each((_, li) => {
-    //     if (li.classList.contains("inventory-header")) return;
-    //     li.setAttribute("draggable", true);
-    //     li.addEventListener("dragstart", handler, false);
-    //   });
-    // }
-
     html.find(".attribute-roll").click((ev) => this.#onAttributeRoll(ev));
     html.find(".item-xp-field").change((ev) => this.#onItemXpUpdate(ev));
+    html.find(".item-complexity-select").change((ev) => this.#onItemComplexitySelect(ev));
+    html.find(".item-link-select").change((ev) => this.#onItemLinkSelect(ev));
   }
 
   /**
@@ -136,5 +126,30 @@ export default class AtowActorSheet extends ActorSheet {
 
     await item.update({"system.xp": xp});
     await this.render(false);
+  }
+
+  async #onItemComplexitySelect(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    const itemId = element.closest(".item").dataset.itemId;
+    const item = this.actor.items.get(itemId);
+
+    const newRating = element.value;
+
+    await item.update({"system.complexity": newRating});
+    await this.render(false);
+  }
+
+  async #onItemLinkSelect(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    const itemId = element.closest(".item").dataset.itemId;
+    const item = this.actor.items.get(itemId);
+    const linkField = element.dataset.linkField;
+
+    const newLink = element.value;
+    const updates = Object.fromEntries([[`system.${linkField}`, newLink]]);
+
+    await item.update(updates);
   }
 }

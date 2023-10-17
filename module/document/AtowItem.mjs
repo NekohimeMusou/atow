@@ -5,7 +5,7 @@ export default class AtowItem extends Item {
   }
 
   /** @override */
-  prepareDerivedData() {
+  prepareBaseData() {
     this._prepareTraitData();
     this._prepareSkillData();
   }
@@ -23,13 +23,15 @@ export default class AtowItem extends Item {
     this.system.linkMod = this._getLinkMod();
     // FIXTHIS: Add actual code for the rank
     this.system.rank = 0;
+
+    this.system.total = this.system.rank + this.system.linkMod;
   }
 
   _getLinkMod() {
     const [link1, link2] = [this.system.link1, this.system.link2];
 
-    const linkMod1 = this.actor?.attributes?.[link1]?.linkMod || 0;
-    const linkMod2 = this.actor?.attributes?.[link2]?.linkMod || 0;
+    const linkMod1 = this.actor.system.attributes?.[link1]?.linkMod || 0;
+    const linkMod2 = this.actor.system.attributes?.[link2]?.linkMod || 0;
 
     return linkMod1 + linkMod2;
   }

@@ -38,6 +38,7 @@
         "skills": {
             "skill": "Skill",
             "complexity": "Complexity",
+            "total": "Total",
             "complexityRating": {
                 "sb": "Simple Basic",
                 "sa": "Simple Advanced",

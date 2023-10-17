@@ -12,7 +12,8 @@ export default class AtowItemData extends foundry.abstract.DataModel {
       }),
       // Skill stuff
       link1: new fields.StringField({
-        required: false,
+        required: true,
+        initial: "str",
       }),
       link2: new fields.StringField({
         required: false,
@@ -32,6 +33,10 @@ export default class AtowItemData extends foundry.abstract.DataModel {
       }),
       linkMod: new fields.NumberField({
         required: false,
+        integer: true,
+      }),
+      total: new fields.NumberField({
+        initial: 0,
         integer: true,
       }),
     };
