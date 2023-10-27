@@ -1,22 +1,34 @@
-// async function stdRoll({
-//   rollData = {},
-//   modifier = 0,
-//   // Name of a skill; ID for an attribute ("str" etc)
-//   label = "",
-//   tn = 12,
-//   // "attribute" or "skill"
-//   rollType="attribute",
-// }={}) {
-//   if (rollType === "attribute") {
-//     // Get attribute list for drop-down, excluding the one we're rolling
-//     const attrList = Object.keys(rollData.attributes)
-//         .filter((a) => a !== label)
-//         .map((a) => ({key: `${a}`, label: `ATOW.attributes.${a}`}));
-//   }
+export async function skillRoll(rollData, skillName, rank, tn, linkMod) {
+  const flavor = `${skillName} Roll`;
+  const {mod, cancelled} = await showAttributeRollDialog(flavor, null);
 
-//   const dialogTitle = `${game.i18n.localize(`ATOW.attributes.${label}`)} Roll`;
-//   const {mod, attr2} = await showAttributeRollDialog(dialogTitle, attrList);
-// }
+  if (cancelled) return;
+
+  const rollFormula = `2d6 + ${rank} + ${linkMod} + ${mod || 0}`;
+
+  const roll = await new Roll(rollFormula, rollData).roll({async: true});
+
+  const total = roll.total;
+
+  const margin = total - tn;
+
+  const successMsg = margin >= 0 ? `Success! MoS: ${margin}` : `Failure! MoF: ${Math.abs(margin)}`;
+
+  const rollResult = await roll.render();
+
+  const content = `<div class="flexcol"><h3>${successMsg}</h3><p>${total} vs. TN ${tn}</p><div>${rollResult}</div></div>`;
+
+  const chatData = {
+    user: game.user.id,
+    speaker: ChatMessage.getSpeaker(),
+    roll,
+    content,
+    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+    flavor,
+  };
+
+  await ChatMessage.create(chatData);
+}
 
 export async function attributeRoll(rollData, attr) {
   // Attribute list for drop-down
@@ -37,7 +49,9 @@ export async function attributeRoll(rollData, attr) {
 
   const targetNumber = isDoubleRoll ? 18 : 12;
 
-  const successMsg = total >= targetNumber ? "Success!" : "Failure!";
+  const margin = total - targetNumber;
+
+  const successMsg = margin >= 0 ? `Success! MoS: ${margin}` : `Failure! MoF: ${Math.abs(margin)}`;
 
   const rollResult = await roll.render();
 
@@ -59,7 +73,7 @@ async function showAttributeRollDialog(title, attrList) {
   async function _processRollOptions(form) {
     return {
       mod: parseInt(form.mod.value || 0),
-      attr2: form.attr2.value,
+      attr2: form?.attr2?.value,
     };
   }
 

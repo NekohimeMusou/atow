@@ -1,5 +1,5 @@
 import {onManageActiveEffect, prepareActiveEffectCategories} from "../config/active-effects.mjs";
-import {attributeRoll} from "../helpers/dice.mjs";
+import {attributeRoll, skillRoll} from "../helpers/dice.mjs";
 
 export default class AtowActorSheet extends ActorSheet {
   /** @override */
@@ -71,6 +71,7 @@ export default class AtowActorSheet extends ActorSheet {
     html.find(".effect-control").click((ev) => onManageActiveEffect(ev, this.actor));
 
     html.find(".attribute-roll").click((ev) => this.#onAttributeRoll(ev));
+    html.find(".use-skill").click((ev) => this.#onSkillRoll(ev));
     html.find(".item-complexity-select").change((ev) => this.#onItemComplexitySelect(ev));
     html.find(".item-link-select").change((ev) => this.#onItemLinkSelect(ev));
     html.find(".item-rank-field").change((ev) => this.#onItemRankUpdate(ev));
@@ -110,20 +111,25 @@ export default class AtowActorSheet extends ActorSheet {
     const element = event.currentTarget;
     const dataset = element.dataset;
     const attr = dataset.attr;
-    // const actorData = this.actor.system;
 
     const rollData = this.actor.getRollData();
-    // const modifier = actorData.attributes?.[attr]?.value;
-    // const rollType = "attribute";
 
     return await attributeRoll(rollData, attr);
+  }
 
-    // return await stdRoll({
-    //   rollData,
-    //   modifier,
-    //   label: attr,
-    //   rollType,
-    // });
+  async #onSkillRoll(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    const itemId = element.closest(".item").dataset.itemId;
+    const skill = this.actor.items.get(itemId);
+
+    const rollData = this.actor.getRollData();
+    const skillName = skill.name;
+    const rank = skill.system.rank;
+    const tn = skill.system.tn;
+    const linkMod = skill.system.linkMod;
+
+    skillRoll(rollData, skillName, rank, tn, linkMod);
   }
 
   async #onItemRankUpdate(event) {
