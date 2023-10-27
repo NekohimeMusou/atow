@@ -5,11 +5,6 @@ export default class AtowItemData extends foundry.abstract.DataModel {
 
     return {
       description: new fields.HTMLField(),
-      // FIXTHIS: Figure out how to use subclasses if possible
-      xp: new fields.NumberField({
-        required: false,
-        integer: true,
-      }),
       // Skill stuff
       link1: new fields.StringField({
         required: true,

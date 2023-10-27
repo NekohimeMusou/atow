@@ -71,9 +71,9 @@ export default class AtowActorSheet extends ActorSheet {
     html.find(".effect-control").click((ev) => onManageActiveEffect(ev, this.actor));
 
     html.find(".attribute-roll").click((ev) => this.#onAttributeRoll(ev));
-    html.find(".item-xp-field").change((ev) => this.#onItemXpUpdate(ev));
     html.find(".item-complexity-select").change((ev) => this.#onItemComplexitySelect(ev));
     html.find(".item-link-select").change((ev) => this.#onItemLinkSelect(ev));
+    html.find(".item-rank-field").change((ev) => this.#onItemRankUpdate(ev));
   }
 
   /**
@@ -110,22 +110,31 @@ export default class AtowActorSheet extends ActorSheet {
     const element = event.currentTarget;
     const dataset = element.dataset;
     const attr = dataset.attr;
+    // const actorData = this.actor.system;
 
-    if (!attr) return;
+    const rollData = this.actor.getRollData();
+    // const modifier = actorData.attributes?.[attr]?.value;
+    // const rollType = "attribute";
 
-    return await attributeRoll(this.actor.getRollData(), attr);
+    return await attributeRoll(rollData, attr);
+
+    // return await stdRoll({
+    //   rollData,
+    //   modifier,
+    //   label: attr,
+    //   rollType,
+    // });
   }
 
-  async #onItemXpUpdate(event) {
+  async #onItemRankUpdate(event) {
     event.preventDefault();
     const element = event.currentTarget;
     const itemId = element.closest(".item").dataset.itemId;
     const item = this.actor.items.get(itemId);
 
-    const xp = parseInt(element.value) || 0;
+    const newRank = element.value;
 
-    await item.update({"system.xp": xp});
-    await this.render(false);
+    await item.update({"system.rank": newRank});
   }
 
   async #onItemComplexitySelect(event) {

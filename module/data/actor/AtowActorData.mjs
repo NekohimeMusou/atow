@@ -7,11 +7,6 @@ export default class AtowActorData extends foundry.abstract.DataModel {
         Object.fromEntries(
             ["str", "bod", "rfl", "dex", "int", "wil", "cha", "edg"].map(
                 (a) => [a, new fields.SchemaField({
-                  xp: new fields.NumberField({
-                    required: true,
-                    initial: 0,
-                    integer: true,
-                  }),
                   linkMod: new fields.NumberField({
                     initial: 0,
                     integer: true,
@@ -59,6 +54,9 @@ export default class AtowActorData extends foundry.abstract.DataModel {
           initial: 1,
           integer: true,
         }),
+      }),
+      totalXp: new fields.NumberField({
+        integer: true,
       }),
       attributes,
     };

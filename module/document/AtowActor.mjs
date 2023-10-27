@@ -8,17 +8,10 @@ export default class AtowActor extends Actor {
     // const flags = this.flags.atow || {};
 
     this._prepareAttributes();
-
-    this.system.xpTotal = this.calcXpTotal();
   }
 
   _prepareAttributes() {
     const attributes = this.system.attributes;
-
-    // Calculate attribute values from XP
-    Object.values(attributes).forEach(
-        (a) => a.value = Math.max(Math.trunc(a.xp / 100), 0),
-    );
 
     // Calculate link modifiers
     Object.values(attributes).forEach(
@@ -50,22 +43,6 @@ export default class AtowActor extends Actor {
       default:
         return Math.min(Math.floor(attribute / 3), 5);
     }
-  }
-
-  calcXpTotal() {
-    const attributes = this.system.attributes;
-
-    const attribXp = Object.values(attributes).reduce((total, a) => total + a.xp, 0);
-
-    const traits = this.items.filter((i) => i.type === "trait");
-
-    const traitXp = traits.reduce((total, trait) => total + trait.xp, 0);
-
-    const skills = this.items.filter((i) => i.type === "skill");
-
-    const skillXp = skills.reduce((total, skill) => total + skill.xp, 0);
-
-    return attribXp + traitXp + skillXp;
   }
 
   /** @inheritdoc */

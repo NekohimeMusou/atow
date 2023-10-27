@@ -12,8 +12,6 @@ export default class AtowItem extends Item {
 
   _prepareTraitData() {
     if (this.type !== "trait") return;
-
-    this.system.rank = Math.trunc((this.system.xp || 0) / 100);
   }
 
   _prepareSkillData() {
@@ -21,8 +19,6 @@ export default class AtowItem extends Item {
 
     this.system.tn = CONFIG.ATOW.skillTNs?.[this.system.complexity] || 7;
     this.system.linkMod = this._getLinkMod();
-    // FIXTHIS: Add actual code for the rank
-    this.system.rank = 0;
 
     this.system.total = this.system.rank + this.system.linkMod;
   }

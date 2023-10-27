@@ -8,7 +8,6 @@
       <div class="item-link">{{localize "ATOW.mechanic.link"}} 1</div>
       <div class="item-link">{{localize "ATOW.mechanic.link"}} 2</div>
       <div class="item-rank">{{localize "ATOW.mechanic.rank"}}</div>
-      <div class="item-xp">{{localize "ATOW.mechanic.xp"}}</div>
       <div class="item-controls">
         <a class="item-control item-create" title="{{localize "ATOW.sheet.createItem"}}" data-type="skill"><i class="fas fa-plus"></i> {{localize "ATOW.sheet.addItem"}}</a>
       </div>
@@ -43,10 +42,7 @@
         </select>
       </div>
       <div class="item-rank item-prop">
-        <input type="number" value="{{item.system.rank}}" disabled/>
-      </div>
-      <div class="item-xp item-prop">
-        <input type="number" class="item-xp-field" min="0" placeholder="0" value="{{item.system.xp}}" data-dtype="Number"/>
+        <input class="item-rank-field" type="number" value="{{item.system.rank}}"/>
       </div>
       <div class="item-controls">
         <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>

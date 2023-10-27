@@ -1,3 +1,23 @@
+// async function stdRoll({
+//   rollData = {},
+//   modifier = 0,
+//   // Name of a skill; ID for an attribute ("str" etc)
+//   label = "",
+//   tn = 12,
+//   // "attribute" or "skill"
+//   rollType="attribute",
+// }={}) {
+//   if (rollType === "attribute") {
+//     // Get attribute list for drop-down, excluding the one we're rolling
+//     const attrList = Object.keys(rollData.attributes)
+//         .filter((a) => a !== label)
+//         .map((a) => ({key: `${a}`, label: `ATOW.attributes.${a}`}));
+//   }
+
+//   const dialogTitle = `${game.i18n.localize(`ATOW.attributes.${label}`)} Roll`;
+//   const {mod, attr2} = await showAttributeRollDialog(dialogTitle, attrList);
+// }
+
 export async function attributeRoll(rollData, attr) {
   // Attribute list for drop-down
   const attrList = Object.keys(rollData.attributes)
@@ -5,9 +25,11 @@ export async function attributeRoll(rollData, attr) {
       .map((a) => ({key: `${a}`, label: `ATOW.attributes.${a}`}));
 
   const flavor = `${game.i18n.localize(`ATOW.attributes.${attr}`)} Roll`;
-  const {mod, attr2} = await showAttributeRollDialog(flavor, attrList);
-  const isDoubleRoll = attr2 && attr !== attr2;
-  const rollFormula = `2d6 + @${attr} + ${isDoubleRoll ? `@${attr2} + ` : ""}${mod}`;
+  const {mod, attr2, cancelled} = await showAttributeRollDialog(flavor, attrList);
+  if (cancelled) return;
+
+  const isDoubleRoll = Boolean(attr2 && attr !== attr2);
+  const rollFormula = `2d6 + @${attr} + ${isDoubleRoll ? `@${attr2} + ` : ""}${mod || 0}`;
 
   const roll = await new Roll(rollFormula, rollData).roll({async: true});
 
@@ -24,9 +46,10 @@ export async function attributeRoll(rollData, attr) {
   const chatData = {
     user: game.user.id,
     speaker: ChatMessage.getSpeaker(),
-    roll: roll,
+    roll,
     content,
     type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+    flavor,
   };
 
   await ChatMessage.create(chatData);
