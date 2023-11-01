@@ -75,6 +75,7 @@ export default class AtowActorSheet extends ActorSheet {
     html.find(".item-complexity-select").change((ev) => this.#onItemComplexitySelect(ev));
     html.find(".item-link-select").change((ev) => this.#onItemLinkSelect(ev));
     html.find(".item-rank-field").change((ev) => this.#onItemRankUpdate(ev));
+    html.find(".item-name-field").change((ev) => this.#onItemNameUpdate(ev));
   }
 
   /**
@@ -166,5 +167,19 @@ export default class AtowActorSheet extends ActorSheet {
     const updates = Object.fromEntries([[`system.${linkField}`, newLink]]);
 
     await item.update(updates);
+  }
+
+  async #onItemNameUpdate(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    const itemId = element.closest(".item").dataset.itemId;
+    const item = this.actor.items.get(itemId);
+
+    if (!element.value) {
+      element.value = item.name;
+      return;
+    }
+
+    await item.update({"name": element.value});
   }
 }
