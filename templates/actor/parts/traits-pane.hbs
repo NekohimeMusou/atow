@@ -1,4 +1,4 @@
-<div class="items-list flexcol">
+<div class="flexcol">
   <ol class="items-list">
     <li class="item flexrow items-header">
       <div class="item-name">{{localize "ATOW.traits.trait"}}</div>
@@ -13,7 +13,7 @@
         <div class="item-image">
           <a class="use-item"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></a>
         </div>
-        <h4>{{item.name}}</h4>
+        <input type="text" class="item-name-field" data-dtype="String" value="{{item.name}}"/>
       </div>
       <div class="item-rank item-prop">
         <input class="item-rank-field" type="number" value="{{item.system.rank}}"/>
