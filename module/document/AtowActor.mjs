@@ -54,6 +54,8 @@ export default class AtowActor extends Actor {
       data[`${k}Link`] = v.linkMod;
     }
 
+    data.initMod = this.system.initiativeMod || 0;
+
     return data;
   }
 }

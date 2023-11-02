@@ -33,7 +33,8 @@
             "link": "Link",
             "rank": "Rank",
             "tn": "TN",
-            "mod": "Mod"
+            "mod": "Mod",
+            "initiativeMod": "Initiative Mod"
         },
         "skills": {
             "skill": "Skill",

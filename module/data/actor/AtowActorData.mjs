@@ -59,6 +59,10 @@ export default class AtowActorData extends foundry.abstract.DataModel {
         integer: true,
       }),
       attributes,
+      initiativeMod: new fields.NumberField({
+        integer: true,
+        initial: 0,
+      }),
     };
   }
 }

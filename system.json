@@ -29,5 +29,10 @@
             "name": "English",
             "path": "lang/en.json"
         }
-    ]
+    ],
+    "primaryTokenAttribute": "stdDamage",
+    "secondaryTokenAttribute": "fatigueDamage",
+    "initiative": "2d6+@initMod",
+    "gridDistance": 5,
+    "gridUnits": "m"
 }
